@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FMK - Starting game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-1">
+                Add names
+            </h1>
+            <p class="subtitle">
+                You need to add names so we can give options
+            </p>
+            <p>
+                <strong id="hd">Names (0):</strong>
+                <span id="names"></span>
+            </p>
+            <br>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" id="namebox" type="text" placeholder="Name">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-success" id="addbutton">
+                        Add
+                      </button>
+                </p>
+            </div>
+            <br><br>
+            <a class="button is-success is-large" disabled href="/startgame/1">Continue ➡️</a>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        jQuery.fn.some = function(fn, thisArg) {
+            var result;
+            for (var i = 0, iLen = this.length; i < iLen; i++) {
+                if (this.hasOwnProperty(i)) {
+                    if (typeof thisArg == 'undefined') {
+                        result = fn(this[i], i, this);
+                    } else {
+                        result = fn.call(thisArg, this[i], i, this);
+                    }
+                    if (result) return true;
+                }
+            }
+            return false;
+        };
+
+        $("#addbutton").click(function() {
+            var inp = $("#namebox").val();
+            if (!inp) return;
+            if ($("#names").children.some((c) => c.text() == inp)) {
+                return
+            }
+        })
+    </script>
+</body>
+
+</html>
