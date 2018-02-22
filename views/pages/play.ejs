@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -7,6 +8,11 @@
     <title>FMK - Starting game</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <style>
+        .bholder {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,38 +22,62 @@
                 <div class="column" style="text-align: center;">
                     <div class="notification is-info is-size-1">
                         🍆
-                        <span class="is-size-5">
-                            <div class="field is-grouped">
+                        <div class="is-size-5">
+                            <div class="field is-grouped bholder">
                                 <p class="control">
-                                    <a class="button is-danger" id="fuck-1">
-                                        
+                                    <a class="button is-dark is-invisible" id="fuck-1">
                                     </a>
                                 </p>
                                 <p class="control">
-                                    <a class="button is-danger" id="fuck-2">
-                                            
+                                    <a class="button is-dark is-invisible" id="fuck-2">
                                     </a>
-                                    </p>
-                                    <p class="control">
-                                            <a class="button is-danger" id="fuck-3">
-                                                
-                                            </a>
-                                        </p>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-dark is-invisible" id="fuck-3">
+                                    </a>
+                                </p>
                             </div>
-                        </span>
+                        </div>
                     </div>
                 </div>
                 <div class="column" style="text-align: center;">
-                    <p class="notification is-dark is-size-1">
+                    <div class="notification is-dark is-size-1">
                         💍
-                    </p>
+                        <div class="is-size-5">
+                            <div class="field is-grouped bholder">
+                                <p class="control">
+                                    <a class="button is-info is-invisible" id="marry-1">
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-info is-invisible" id="marry-2">
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="column" style="text-align: center;">
-                    <p class="notification is-danger is-size-1">
+                    <div class="notification is-danger is-size-1">
                         🔫
-                    </p>
+                        <div class="is-size-5">
+                            <div class="field is-grouped bholder">
+                                <p class="control">
+                                    <a class="button is-dark is-invisible" id="kill-1">
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-dark is-invisible" id="kill-2">
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-dark is-invisible" id="kill-3">
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -81,7 +111,13 @@
             console.log("I am master yay");
             socket.on("people", function(p) {
                 var pShuffled = shuffle(p);
-                $(".container").append(pShuffled.slice(0, 3).join(","))
+                //$(".container").append(pShuffled.slice(0, 3).join(","));
+                ["fuck-1", "fuck-2", "fuck-3"].forEach(function(el, i) {
+                    var b = $("#" + el);
+                    b.text(pShuffled[i]);
+                    b.toggleClass("is-invisible");
+                    b.prop("disabled", false);
+                })
             })
         })
         socket.on("disconnect", function(r) {
