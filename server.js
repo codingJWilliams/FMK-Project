@@ -13,6 +13,9 @@ app.get('/joingame', function(req, res) {
 app.get("/startgame/1", (req, res) => {
     res.sendFile(__dirname + "/misc/startgame.1.html");
 })
+app.get("/startgame/2/:people", (req, res) => {
+    res.sendFile(__dirname + "/misc/startgame.1.html");
+})
 io.on('connection', function(socket) {
 
 });

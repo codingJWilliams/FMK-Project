@@ -16,7 +16,7 @@
                 Add names
             </h1>
             <p class="subtitle">
-                You need to add names so we can give options
+                You need to add names so we can give you and your friends options
             </p>
             <p>
                 <strong id="hd">Names (0):</strong>
@@ -38,32 +38,29 @@
                       </button>
                 </p>
             </div>
-            <br><br>
-            <a class="button is-success is-large" disabled href="/startgame/1">Continue ➡️</a>
+            <a class="button is-primary is-large" style="display:none;" id="cont">Continue ➡️</a>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        jQuery.fn.some = function(fn, thisArg) {
-            var result;
-            for (var i = 0, iLen = this.length; i < iLen; i++) {
-                if (this.hasOwnProperty(i)) {
-                    if (typeof thisArg == 'undefined') {
-                        result = fn(this[i], i, this);
-                    } else {
-                        result = fn.call(thisArg, this[i], i, this);
-                    }
-                    if (result) return true;
-                }
-            }
-            return false;
-        };
-
+        $("#cont").click(function() {
+            var namesArr = [];
+            var names = $("#names").children();
+            names.each(function(i, elem) {
+                var nameClean = elem.textContent;
+                namesArr.push(nameClean);
+            })
+            window.location.replace("/startgame/2/" + btoa(JSON.stringify(namesArr)));
+        })
         $("#addbutton").click(function() {
             var inp = $("#namebox").val();
             if (!inp) return;
-            if ($("#names").children.some((c) => c.text() == inp)) {
-                return
+            console.log("Is new")
+            $("#names").append("<span><br>" + inp + "</span>")
+            $("#hd").text("Names (" + $("#names").children().length + ")")
+            if ($("#names").children().length == 3) {
+                console.log("hi?")
+                $("#cont").fadeIn(300);
             }
         })
     </script>
