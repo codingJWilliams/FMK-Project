@@ -57,6 +57,7 @@
             if (!inp) return;
             console.log("Is new")
             $("#names").append("<span><br>" + inp + "</span>")
+            $("#namebox").val("")
             $("#hd").text("Names (" + $("#names").children().length + ")")
             if ($("#names").children().length == 3) {
                 console.log("hi?")

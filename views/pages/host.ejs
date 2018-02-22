@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FMK - Starting game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-1">Game code
+                <p class="subtitle is-3">
+                    <%= code %>
+                </p>
+            </h1>
+            <h1 class="title is-1">Players</h1>
+            <table style="min-width: 200px;" id="tb">
+                <tr>
+                    <th>
+                        Name&nbsp;
+                    </th>
+                    <th>
+                        Socket ID&nbsp;
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        var code = "<%= code %>";
+
+        function redraw(players) {
+            $("#tb").html("<tr><th>Name&nbsp;</th><th>Socket ID&nbsp;</th></tr>");
+            players.forEach(function(p) {
+                $("#tb").append("<tr><td>" + p.name + "</td><td>" + p.id + "</td></tr>");
+
+            })
+        }
+        socket.on("playerRelist", redraw)
+    </script>
+</body>
+
+</html>

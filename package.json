@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/codingJWilliams/FMK-Project#readme",
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "mongodb": "^3.0.2",
+    "shortid": "^2.2.8",
     "socket.io": "^2.0.4"
   }
 }
