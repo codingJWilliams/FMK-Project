@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FMK - Starting game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column" style="text-align: center;">
+                    <div class="notification is-info is-size-1">
+                        🍆
+                        <span class="is-size-5">
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <a class="button is-danger" id="fuck-1">
+                                        
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-danger" id="fuck-2">
+                                            
+                                    </a>
+                                    </p>
+                                    <p class="control">
+                                            <a class="button is-danger" id="fuck-3">
+                                                
+                                            </a>
+                                        </p>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="column" style="text-align: center;">
+                    <p class="notification is-dark is-size-1">
+                        💍
+                    </p>
+                </div>
+                <div class="column" style="text-align: center;">
+                    <p class="notification is-danger is-size-1">
+                        🔫
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        function shuffle(arrayIn) {
+            /**@type {Array}*/
+            var array = arrayIn.slice(0);
+            var tmp, current, top = array.length;
+
+            if (top)
+                while (--top) {
+                    current = Math.floor(Math.random() * (top + 1));
+                    tmp = array[current];
+                    array[current] = array[top];
+                    array[top] = tmp;
+                }
+            return array;
+        }
+
+        const socket = io();
+        var code = "<%= gcode %>";
+        console.log(code)
+        socket.emit("join", {
+            gcode: code,
+            name: "<%= name %>"
+        })
+        socket.on("_err", alert)
+        socket.on("u are master", function() {
+            console.log("I am master yay");
+            socket.on("people", function(p) {
+                var pShuffled = shuffle(p);
+                $(".container").append(pShuffled.slice(0, 3).join(","))
+            })
+        })
+        socket.on("disconnect", function(r) {
+            $("body").prepend("<div class='notification is-danger'> <strong>Lost connection</strong> to server. Please let Jay know</strong></div>")
+        })
+    </script>
+</body>
+
+</html>

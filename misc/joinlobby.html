@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FMK - Starting game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-1">
+                Game code
+            </h1>
+
+            <div class="field">
+                <p class="control">
+                    <input class="input" id="codebox" type="text" onkeyup="$('#cont').fadeIn(300)" placeholder="XXXXX-XXX">
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <input class="input" id="namebox" type="text" onkeyup="$('#cont').fadeIn(300)" placeholder="Your name">
+                </p>
+            </div>
+            <a class="button is-primary is-large" style="display:none;" id="cont">Continue ➡️</a>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $("#cont").click(function() {
+            window.location = "/play/" + $("#codebox").val() + "/" + $("#namebox").val();
+        })
+    </script>
+</body>
+
+</html>

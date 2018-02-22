@@ -35,8 +35,10 @@
     <script>
         const socket = io();
         var code = "<%= code %>";
+        socket.emit("host", code)
 
         function redraw(players) {
+            console.log("redraw")
             $("#tb").html("<tr><th>Name&nbsp;</th><th>Socket ID&nbsp;</th></tr>");
             players.forEach(function(p) {
                 $("#tb").append("<tr><td>" + p.name + "</td><td>" + p.id + "</td></tr>");
@@ -44,6 +46,9 @@
             })
         }
         socket.on("playerRelist", redraw)
+        socket.on("disconnect", function(r) {
+            $("body").prepend("<div class='notification is-danger'> <strong>Lost connection</strong> to server. Please let Jay know</strong></div>")
+        })
     </script>
 </body>
 
